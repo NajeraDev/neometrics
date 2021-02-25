@@ -1,0 +1,29 @@
+.logo{
+    max-height: 50px;
+}
+
+.addbutton{
+    background-color: #F30198;
+    width: 70.93px;
+    height: 35px;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    padding: 6px 12px;
+    &:hover{
+        color: white;
+    }
+}
+
+.topnavbar{
+    background-color: white;
+}
+
+p {
+  color: #bf1650;
+}
+
+p::before {
+  display: inline;
+  content: "⚠ ";
+}

@@ -6,9 +6,7 @@ import {
   Link
 } from "react-router-dom";
 import Home from './Pages/Home'
-import Insights from './Pages/Insights'
 import './App.css';
-
 import {
   Container,
   Row,
@@ -17,73 +15,26 @@ import {
   Nav,
   NavItem,
   NavLink,
-  
 } from 'reactstrap'
+import { ThemeConsumer } from 'react-bootstrap/esm/ThemeProvider';
+import EditSchool from './Pages/EditSchool/index';
+import NavBarR from './Components/NavBarR';
+import NewSchool from './Pages/NewSchool';
+import Login from './Pages/Login';
 
 
 
 function App() {
-
-
-    const [postId, setPostId] = useState(null);
-    useEffect(() => {
-      
-      
-      const requestOptions = {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ name: 'Carmen Serdan', users:40, creditCard:[1234567890123456,18.20,898], plan:"tier 3", date: "today", location: 'av unidad deportiva 2047' })
-      };
-      fetch('https://neometrics-64670-default-rtdb.firebaseio.com/schools/.json', requestOptions)
-        .then(response => response.json())
-        .then(data => setPostId(data.id));
-
-      
-    }, []);
-
-
-    return (
+  return (
     <Router>
-    <Container fluid className="p-0">
-            <div className="bg-info ">
-              <Navbar color="light" light expand="md">
-        
-          <Nav className="m-auto" navbar>
-            <NavItem>
-              <NavLink>
-                <Link to="/">
-                  Home
-                </Link>
-              </NavLink>
-            </NavItem>
-              <NavLink>
-                <Link to="/insights">
-                  Insights
-                </Link>
-              </NavLink>
-          </Nav>
-          
-      </Navbar>
-            </div>
-      <Container>
-        <Row>
-          <Col className="col-12">
-                <Switch>
-                  <Route path="/insights">
-                  <Insights/>
-                  </Route>
-                  <Route path="/">
-                  <Home/>
-                  </Route>
-                </Switch>
-          </Col>
-        </Row>
-      </Container>
-    </Container>
-    </Router>  
-    )
- }
-  
-
+      <Switch>
+        <Route path="/login" component={Login} exact={true} />
+        <Route path="/dashboard" component={Home} exact={true} />
+        <Route path="/editschool" component={EditSchool} exact={true} />
+        <Route path="/newschool" component={NewSchool} exact={true} />
+      </Switch>
+    </Router>
+  )
+}
 
 export default App;

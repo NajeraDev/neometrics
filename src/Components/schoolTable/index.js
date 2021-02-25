@@ -1,188 +1,211 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import clsx from 'clsx';
-import { withStyles } from '@material-ui/core/styles';
-import TableCell from '@material-ui/core/TableCell';
-import Paper from '@material-ui/core/Paper';
-import { AutoSizer, Column, Table } from 'react-virtualized';
+import {
+  CCard,
+  CCardBody,
+  CDataTable,
+  CBadge,
+  CButton,
+  CCollapse,
+} from '@coreui/react';
+import {
+  Modal,
+  ModalHeader,
+  ModalBody,
+  ModalFooter,
+  Button,
+} from 'reactstrap'
+import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import '../../App.css';
 
-const styles = (theme) => ({
-  flexContainer: {
-    display: 'flex',
-    alignItems: 'center',
-    boxSizing: 'border-box',
-  },
-  table: {
-    '& .ReactVirtualized__Table__headerRow': {
-      flip: false,
-      paddingRight: theme.direction === 'rtl' ? '0 !important' : undefined,
-    },
-  },
-  tableRow: {
-    cursor: 'pointer',
-  },
-  tableRowHover: {
-    '&:hover': {
-      backgroundColor: theme.palette.grey[500],
-    },
-  },
-  tableCell: {
-    flex: 1,
-  },
-  noClick: {
-    cursor: 'initial',
-  },
-});
 
-class MuiVirtualizedTable extends React.PureComponent {
-  static defaultProps = {
-    headerHeight: 48,
-    rowHeight: 48,
-  };
+function SchoolTable() {
 
-  getRowClassName = ({ index }) => {
-    const { classes, onRowClick } = this.props;
 
-    return clsx(classes.tableRow, classes.flexContainer, {
-      [classes.tableRowHover]: index !== -1 && onRowClick != null,
-    });
-  };
+  /// DONDE LA INFORMACION DE LAS ESCUELAS VA A SER GUARDADA.
+  const [Schools, setSchools] = useState([])
 
-  cellRenderer = ({ cellData, columnIndex }) => {
-    const { columns, classes, rowHeight, onRowClick } = this.props;
-    return (
-      <TableCell
-        component="div"
-        className={clsx(classes.tableCell, classes.flexContainer, {
-          [classes.noClick]: onRowClick == null,
-        })}
-        variant="body"
-        style={{ height: rowHeight }}
-        align={(columnIndex != null && columns[columnIndex].numeric) || false ? 'right' : 'left'}
-      >
-        {cellData}
-      </TableCell>
-    );
-  };
-
-  headerRenderer = ({ label, columnIndex }) => {
-    const { headerHeight, columns, classes } = this.props;
-
-    return (
-      <TableCell
-        component="div"
-        className={clsx(classes.tableCell, classes.flexContainer, classes.noClick)}
-        variant="head"
-        style={{ height: headerHeight }}
-        align={columns[columnIndex].numeric || false ? 'right' : 'left'}
-      >
-        <span>{label}</span>
-      </TableCell>
-    );
-  };
-
-  render() {
-    const { classes, columns, rowHeight, headerHeight, ...tableProps } = this.props;
-    return (
-      <AutoSizer>
-        {({ height, width }) => (
-          <Table
-            height={height}
-            width={width}
-            rowHeight={rowHeight}
-            gridStyle={{
-              direction: 'inherit',
-            }}
-            headerHeight={headerHeight}
-            className={classes.table}
-            {...tableProps}
-            rowClassName={this.getRowClassName}
-          >
-            {columns.map(({ dataKey, ...other }, index) => {
-              return (
-                <Column
-                  key={dataKey}
-                  headerRenderer={(headerProps) =>
-                    this.headerRenderer({
-                      ...headerProps,
-                      columnIndex: index,
-                    })
-                  }
-                  className={classes.flexContainer}
-                  cellRenderer={this.cellRenderer}
-                  dataKey={dataKey}
-                  {...other}
-                />
-              );
-            })}
-          </Table>
-        )}
-      </AutoSizer>
-    );
+  async function getData() {
+    await fetch("https://neometrics-64670-default-rtdb.firebaseio.com/.json")
+      .then(response => response.json())
+      .then(json => setSchools(json))
   }
-}
 
+  ///////Modal
+  const [deleteId, setDeleteId] = useState();
+  const [modal, setModal] = useState(false);
+  const toggle = (id) => {
+    setModal(!modal)
+    setDeleteId(id)
+    console.log("El id a eliminar es: ", id)
+  };
+  const cancel = () => {
+    setModal(!modal)
+  }
+  const confirmDelete = () => {
+    setModal(!modal)
+    deleteHandler(deleteId)
+  }
 
+  ////////////
 
-const VirtualizedTable = withStyles(styles)(MuiVirtualizedTable);
+  useEffect(async () => {
+    getData()
+  }, [])
 
-const sample = [
-  ['Carmen Serdan', 159, 6.0, 24, 4.0],
-  ['Galileo Galilei', 237, 9.0, 37, 4.3],
-  ['CENHCH', 262, 16.0, 24, 6.0],
-  ['BUAP', 305, 3.7, 67, 4.3],
-  ['Tec de Monterrey', 356, 16.0, 49, 3.9],
-];
+  const [details, setDetails] = useState([])
 
-function createData(id, name, users, creditCard, plan, date) {
-  return { id, name, users, creditCard, plan, date};
-}
+  const toggleDetails = (index) => {
+    const position = details.indexOf(index)
+    let newDetails = details.slice()
+    if (position !== -1) {
+      newDetails.splice(position, 1)
+    } else {
+      newDetails = [...details, index]
+    }
+    setDetails(newDetails)
+  }
 
-const rows = [];
+  const deleteHandler = (id) => {
+    fetch(`https://neometrics-64670-default-rtdb.firebaseio.com/${id}.json`, { method: 'DELETE' })
+      .then(() => console.log('Delete successful'))
+      .then(() => window.location.reload(false))
+  }
 
-for (let i = 0; i < 100; i += 1) {
-  const randomSelection = sample[Math.floor(Math.random() * sample.length)];
-  rows.push(createData(i, ...randomSelection));
-}
+  const fields = [
+    { key: 'schoolName', _style: { width: '40%' } },
+    { key: 'tier', _style: { width: '10%' } },
+    { key: 'users', _style: { width: '20%' } },
+    { key: 'status', _style: { width: '20%' } },
+    {
+      key: 'show_details',
+      label: '',
+      _style: { width: '1%' },
+      sorter: false,
+      filter: false
+    }
+  ]
 
-export default function ReactVirtualizedTable() {
+  const getBadge = (status) => {
+    switch (status) {
+      case true: return 'success'
+      case false: return 'secondary'
+      case 'Pending': return 'warning'
+      case 'Banned': return 'danger'
+      default: return 'primary'
+    }
+  }
+
+  const getStatus = (status) => {
+    if (status == 'Activo') {
+      return { color: 'success', message: 'Activo' }
+    } else {
+      return { color: 'danger', message: 'Inactivo' }
+    }
+  }
+
+  let schoolItems = []
+
+  Schools.forEach((element, index) => {
+    if (element != null) {
+      schoolItems.push(
+        {
+          address: element.address,
+          city: element.city,
+          contact: element.contact,
+          country: element.country,
+          creditCard: element.creditCard,
+          phone: element.phone,
+          registred: element.registred,
+          schoolName: element.schoolName,
+          status: element.status,
+          tier: element.tier,
+          users: element.users,
+          id: index
+        }
+      )
+    }
+    else {
+      console.log("Elemento null")
+    }
+  })
+
   return (
-    <Paper className="mt-3 " style={{height: 800, width: '100%', minWidth:500 }}>
-      <VirtualizedTable
-        rowCount={rows.length}
-        rowGetter={({ index }) => rows[index]}
-        columns={[
-          {
-            width: 120,
-            label: 'School\u00A0Name',
-            dataKey: 'name',
-          },
-          {
-            width: 120,
-            label: 'Users',
-            dataKey: 'users',
-            numeric: true,
-          },
-          {
-            width: 120,
-            label: 'Credit\u00A0Card',
-            dataKey: 'creditCard',
-            
-          },
-          {
-            width: 120,
-            label: 'Plan',
-            dataKey: 'plan',
-            
-          },
-          {
-            width: 120,
-            label: 'Date\u00A0registred',
-            dataKey: 'date',
-            
-          },
-        ]}
+    <CCard className="tableCard align-self-center">
+      <Modal isOpen={modal} toggle={toggle} >
+        <ModalHeader toggle={toggle}>Delete School</ModalHeader>
+        <ModalBody>
+          Are you sure that you want to delete this School? This action cannot be undone.
+        </ModalBody>
+        <ModalFooter>
+          <Link to='/'><Button color="danger" onClick={confirmDelete}>Yes, I want to delete</Button></Link>{' '}
+          <Button color="secondary" onClick={cancel}>Cancel</Button>
+        </ModalFooter>
+      </Modal>
+      <CDataTable
+        items={schoolItems}
+        fields={fields}
+        columnFilter
+
+        footer
+        itemsPerPage={10}
+        hover
+        responsive
+        sorter
+        pagination
+        scopedSlots={{
+          'status':
+            (item) => {
+              let status = getStatus(item.status)
+              return (
+                <td>
+                  <CBadge color={status.color}>
+                    {status.message}
+                  </CBadge>
+                </td>
+              )
+            },
+          'show_details':
+            (item, index) => {
+              return (
+                <td className="py-2">
+                  <CButton
+                    color="info"
+                    shape="square"
+                    size="sm"
+                    onClick={() => { toggleDetails(index) }}>
+                    {details.includes(index) ? 'Hide' : 'Show'}
+                  </CButton>
+                </td>
+              )
+            },
+          'details':
+            (item, index) => {
+              return (
+                <CCollapse show={details.includes(index)}>
+                  <CCardBody>
+                    <p className="text-muted">User since: {item.registred}</p>
+                    <p> Address: {item.address}, {item.city}, {item.country} </p>
+                    <p> Contact: {item.contact} </p>
+                    <p> Credit Card Info: {item.creditCard} </p>
+                    <p> Phone Number: {item.phone}</p>
+                    <p>ID: {item.id}</p>
+                    <Link to={`/editschool/?schoolid=${item.id}`}>
+                      <CButton size="sm" color="info" >
+                        Edit School
+                  </CButton>
+                    </Link>
+                    <CButton size="sm" color="danger" className="ml-1" onClick={() => { toggle(item.id) }}>
+                      Delete
+                  </CButton>
+                  </CCardBody>
+                </CCollapse>
+              )
+            }
+        }}
       />
-    </Paper>
-  );
+    </CCard>
+  )
+
 }
+export default SchoolTable
+//<CButton size="sm" color="danger" className="ml-1" onClick={() => { deleteHandler(item.id) }}>

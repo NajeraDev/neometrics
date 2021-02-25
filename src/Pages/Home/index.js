@@ -1,44 +1,49 @@
-import { 
+import React, { useState, useEffect } from 'react';
+import {
     Col,
     Container,
     Row
- } from 'reactstrap'
-import DetailsCard from '../../Components/detailsCard'
-import Map from '../../Components/Map/Map'
-
-import ReactVirtualizedTable from '../../Components/schoolTable'
-
-
-
+} from 'reactstrap'
+import SchoolTable from '../../Components/schoolTable/index'
+import NavBarR from '../../Components/NavBarR/index'
+import '../../App.css'
 
 function Home() {
+
     return (
-        <>
-        <Container >
-            <Row>
-                <Col xs="12" md="12" lg="6" xl="6">
-                    <h2>
-                        <ReactVirtualizedTable/>
-                    </h2>
-                </Col>
-                <Col xs="6">
-                    <Row>
-                        <Col>
-                            <h2>
-                                <DetailsCard/>
-                            </h2>
-                        </Col>
-                    </Row>
-                    <Row>
+       <>
+            <Container>
+                <Row>
                     <Col>
-                            <h2>
-                                <Map/>
+                        <NavBarR />
+                    </Col>
+                </Row>
+            </Container>
+            <Container>
+                <Row>
+                    <Col xs="12" md="12" lg="12" xl="12">
+                        <h2>
+                            <SchoolTable />
+                        </h2>
+                    </Col>
+                    <Col xs="6">
+                        <Row>
+                            <Col>
+                                <h2>
+                                    Insights
                             </h2>
-                        </Col> 
-                    </Row>
-                </Col>
-            </Row>
-        </Container>
+                            </Col>
+                        </Row>
+                        <Row>
+                            <Col>
+                                <h2>
+
+                                </h2>
+                            </Col>
+                        </Row>
+                    </Col>
+                </Row>
+            </Container>
         </>
     )
 }
