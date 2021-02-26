@@ -22,8 +22,8 @@ function SchoolTable() {
 
   useEffect(async () => {
     getData()
-  }, [])  
-  
+  }, [])
+
 
 
   /// DONDE LA INFORMACION DE LAS ESCUELAS VA A SER GUARDADA.
@@ -111,7 +111,7 @@ function SchoolTable() {
   let SchoolValues = Object.values(Schools)
   console.log(SchoolKeys.length)
 
-  for (const schoolId in Schools){
+  for (const schoolId in Schools) {
     let schoolObj = Schools[schoolId]
     schoolObj.id = schoolId
     schoolItems.push(schoolObj)
@@ -125,7 +125,7 @@ function SchoolTable() {
           Are you sure that you want to delete this School? This action cannot be undone.
         </ModalBody>
         <ModalFooter>
-          <Link to='/'><Button color="danger" onClick={confirmDelete}>Yes, I want to delete</Button></Link>{' '}
+          <Link to='/dashboard'><Button color="danger" onClick={confirmDelete}>Yes, I want to delete</Button></Link>{' '}
           <Button color="secondary" onClick={cancel}>Cancel</Button>
         </ModalFooter>
       </Modal>
