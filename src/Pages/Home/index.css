@@ -1,0 +1,48 @@
+@font-face {
+  font-family: 'Open Sans';
+  src: url("/src/Fonts/Open_Sans/OpenSans-Regular.ttf") format("truetype");
+}
+
+* {
+  font-family: 'Open Sans', sans-serif !important;
+  font-size: large;
+}
+
+.tableCard {
+  height: 100%;
+}
+
+.tablenavbar {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.navlogo {
+  margin: 0;
+}
+
+.addbutton {
+  background-color: #F30198;
+  color: white;
+  font-weight: 700;
+}
+
+.addbutton:hover {
+  color: white;
+  background-color: #ff41b6;
+}
+
+nav {
+  margin: auto;
+}
+
+p {
+  color: black;
+}
+/*# sourceMappingURL=index.css.map */

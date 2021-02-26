@@ -1,137 +1,30 @@
-@charset "UTF-8";
-body {
-  background: #0e101c;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+.smallContainer {
+  background-color: #002B87;
 }
 
-form {
-  max-width: 500px;
-  margin: 0 auto;
-}
-
-h1 {
-  font-weight: 100;
-  color: white;
-  text-align: center;
-  padding-bottom: 10px;
-  border-bottom: 1px solid #4f6294;
-}
-
-.form {
-  background: #0e101c;
-  max-width: 400px;
-  margin: 0 auto;
-}
-
-p {
-  color: #bf1650;
-}
-
-p::before {
-  display: inline;
-  content: "⚠ ";
-}
-
-textarea,
-input {
-  display: block;
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
-  width: 100%;
-  border-radius: 4px;
-  border: 1px solid white;
-  padding: 10px 15px;
-  margin-bottom: 10px;
-  font-size: 14px;
-}
-
-label {
-  line-height: 2;
-  text-align: left;
-  display: block;
-  margin-bottom: 13px;
-  margin-top: 20px;
-  color: white;
-  font-size: 14px;
-  font-weight: 200;
-}
-
-button[type="submit"],
-input[type="submit"] {
-  background: #ec5990;
-  color: white;
-  text-transform: uppercase;
+.addbutton {
   border: none;
-  margin-top: 40px;
-  padding: 20px;
-  font-size: 16px;
-  font-weight: 100;
-  letter-spacing: 10px;
 }
 
-button[type="submit"]:hover,
-input[type="submit"]:hover {
-  background: #bf1650;
+.addschoolnav {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
 }
 
-button[type="submit"]:active,
-input[type="button"]:active,
-input[type="submit"]:active {
-  -webkit-transition: 0.3s all;
-  transition: 0.3s all;
-  -webkit-transform: translateY(3px);
-          transform: translateY(3px);
-  border: 1px solid transparent;
-  opacity: 0.8;
+.addschoollogo {
+  margin: 0;
 }
 
-input:disabled {
-  opacity: 0.4;
-}
-
-input[type="button"]:hover {
-  -webkit-transition: 0.3s all;
-  transition: 0.3s all;
-}
-
-button[type="submit"],
-input[type="button"],
-input[type="submit"] {
-  -webkit-appearance: none;
-}
-
-.App {
-  max-width: 600px;
-  margin: 0 auto;
-}
-
-button[type="button"] {
-  display: block;
-  -webkit-appearance: none;
-     -moz-appearance: none;
-          appearance: none;
-  background: #333;
-  color: white;
+.addschoolsubmit {
+  min-width: 85px;
+  min-height: 42.5px;
   border: none;
-  text-transform: uppercase;
-  padding: 10px 20px;
-  border-radius: 4px;
-}
-
-hr {
-  margin-top: 30px;
-}
-
-button {
-  display: block;
-  -webkit-appearance: none;
-     -moz-appearance: none;
-          appearance: none;
-  margin-top: 40px;
-  border: 1px solid #333;
-  margin-bottom: 20px;
-  text-transform: uppercase;
-  padding: 10px 20px;
-  border-radius: 4px;
+  background-color: #F30198;
+  border-radius: 5px;
+  color: white;
 }
 /*# sourceMappingURL=index.css.map */

@@ -16,9 +16,7 @@ import {
   NavItem,
   NavLink,
 } from 'reactstrap'
-import { ThemeConsumer } from 'react-bootstrap/esm/ThemeProvider';
 import EditSchool from './Pages/EditSchool/index';
-import NavBarR from './Components/NavBarR';
 import NewSchool from './Pages/NewSchool';
 import Login from './Pages/Login';
 

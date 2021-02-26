@@ -1,6 +1,11 @@
 
-.mainCol{
+.containerLogin{
    background-color: #002B87; 
+   height: 100vh;
+}
+
+.Input{
+   border-radius: 25px;
 }
 
 .main{
@@ -19,12 +24,16 @@ img{
 
 #root{
    background-color: #002B87;
-   height: 100vh;
+   min-height: 100vh;
 }
 
 .Submit{
  color: #fff;
  background-color: #F30198;
+ border-radius: 25px;
+ border: none;
+ font-weight: 700;
+ width: 100%;
 }
     
 

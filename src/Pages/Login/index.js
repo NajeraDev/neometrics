@@ -3,6 +3,7 @@ import {
     Container,
     Col,
     Row,
+    Button,
     Card,
     CardHeader,
     CardFooter,
@@ -14,28 +15,29 @@ import {
 import '../Login/index.css'
 import Logo from '../../Images/logo.png'
 
+
 function Login() {
     return (
 
-        <Container>
+        <Container fluid className="containerLogin">
             <Row>
-                <Col className="p-0 mainCol" >
+                <Col className="p-0" >
                     <div className="main">
                         <img className="mb-3" src={Logo} ></img>
-                        <Card className="">
+                        {/* <Card className="">
                             <CardHeader>
                                 Login
                             </CardHeader>
-                            <CardBody>
-                                <Form>
-                                    <Label>Username</Label>
-                                    <Input className="Input mb-3" type="text" required></Input>
-                                    <Label>Password</Label>
-                                    <Input className="Input mb-3" type="password" required></Input>
-                                    <Input className="Submit" type="submit"></Input>
-                                </Form>
-                            </CardBody>
-                        </Card>
+                            <CardBody> */}
+                        <Form>
+
+                            <Input placeholder="email" className="Input mb-3" type="text" required></Input>
+
+                            <Input placeholder="password" className="Input mb-3" type="password" required></Input>
+                            <Button className="Submit" type="submit">Log In</Button>
+                        </Form>
+                        {/* </CardBody>
+                        </Card> */}
                     </div>
                 </Col>
             </Row>

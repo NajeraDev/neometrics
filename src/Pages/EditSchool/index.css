@@ -1,4 +1,12 @@
 .smallContainer {
   max-width: 500px;
 }
+
+.pinkbutton {
+  color: white;
+  border: none;
+  background-color: #F30198 !important;
+  min-width: 77px;
+  min-height: 38.5px;
+}
 /*# sourceMappingURL=index.css.map */

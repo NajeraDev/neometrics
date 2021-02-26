@@ -15,14 +15,19 @@ import {
 } from 'reactstrap'
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import '../../App.css';
+
 
 
 function SchoolTable() {
 
+  useEffect(async () => {
+    getData()
+  }, [])  
+  
+
 
   /// DONDE LA INFORMACION DE LAS ESCUELAS VA A SER GUARDADA.
-  const [Schools, setSchools] = useState([])
+  const [Schools, setSchools] = useState({})
 
   async function getData() {
     await fetch("https://neometrics-64670-default-rtdb.firebaseio.com/.json")
@@ -48,9 +53,6 @@ function SchoolTable() {
 
   ////////////
 
-  useEffect(async () => {
-    getData()
-  }, [])
 
   const [details, setDetails] = useState([])
 
@@ -96,38 +98,24 @@ function SchoolTable() {
   }
 
   const getStatus = (status) => {
-    if (status == 'Activo') {
-      return { color: 'success', message: 'Activo' }
+    if (status) {
+      return { color: 'success', message: 'Active' }
     } else {
-      return { color: 'danger', message: 'Inactivo' }
+      return { color: 'secondary', message: 'Inactive' }
     }
   }
 
   let schoolItems = []
 
-  Schools.forEach((element, index) => {
-    if (element != null) {
-      schoolItems.push(
-        {
-          address: element.address,
-          city: element.city,
-          contact: element.contact,
-          country: element.country,
-          creditCard: element.creditCard,
-          phone: element.phone,
-          registred: element.registred,
-          schoolName: element.schoolName,
-          status: element.status,
-          tier: element.tier,
-          users: element.users,
-          id: index
-        }
-      )
-    }
-    else {
-      console.log("Elemento null")
-    }
-  })
+  let SchoolKeys = Object.keys(Schools)
+  let SchoolValues = Object.values(Schools)
+  console.log(SchoolKeys.length)
+
+  for (const schoolId in Schools){
+    let schoolObj = Schools[schoolId]
+    schoolObj.id = schoolId
+    schoolItems.push(schoolObj)
+  }
 
   return (
     <CCard className="tableCard align-self-center">
@@ -208,4 +196,3 @@ function SchoolTable() {
 
 }
 export default SchoolTable
-//<CButton size="sm" color="danger" className="ml-1" onClick={() => { deleteHandler(item.id) }}>
