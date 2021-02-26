@@ -109,7 +109,7 @@ function EditSchool() {
                     </>
                     <Navbar className="addschoolnav p-0 mb-5 mt-3" light expand="md">
                         <img className="addschoollogo" src={Logo}></img>
-                        <Link to='/dashboard'><Button className="addbutton">Back to Home</Button></Link>
+                        <Link to='/'><Button className="addbutton">Back to Home</Button></Link>
                     </Navbar>
                     <CForm action="" className="mb-5" method="post">
                         <CFormGroup>
@@ -231,7 +231,7 @@ function EditSchool() {
                         className="mr-3  mb-3 pinkbutton"
                         color="success"
                     >Save</CButton>
-                    <Link to='/dashboard'><CButton className=" mb-3" color="secondary">Cancel</CButton></Link>
+                    <Link to='/'><CButton className=" mb-3" color="secondary">Cancel</CButton></Link>
 
 
                     <CAlert color="success" show={show} closeButton > School Updated Successfully! </CAlert>

@@ -34,9 +34,19 @@ img{
  border: none;
  font-weight: 700;
  width: 100%;
+ &:hover{
+    background-color: #fe4cba;
+ }
+
 }
     
+.redirect {
+  color: white;
+}
 
+.redirect:hover {
+  color: #F30198;
+}
 
   
    

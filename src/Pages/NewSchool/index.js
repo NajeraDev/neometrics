@@ -62,7 +62,7 @@ function NewSchool() {
                 <Col>
                     <Navbar className="addschoolnav" light expand="md">
                         <img className="addschoollogo" src={Logo}></img>
-                        <Link to='/dashboard'><Button className="addbutton">Back to Home</Button></Link>
+                        <Link to='/'><Button className="addbutton">Back to Home</Button></Link>
                     </Navbar>
                 </Col>
             </Row>
@@ -187,12 +187,12 @@ function NewSchool() {
                         </FormGroup>
                         {/* <input type="submit" className="addbutton mr-3" value="Submit" /> */}
                         <button className="addschoolsubmit mr-3" onClick={onSubmit}>Submit</button>
-                        <Link to='/dashboard'><Button color="secondary">Cancel</Button></Link>
+                        <Link to='/'><Button color="secondary">Cancel</Button></Link>
                     </form>
 
                     <CAlert color="success" show={Show}>
                         Added a school successfully!
-                        <a href="/dashboard" className="alert-link"> Go Home! </a>
+                        <a href="/" className="alert-link"> Go Home! </a>
                          or
                          <a href="/newschool" className="alert-link"> Add another School</a> </CAlert>
                 </Col>

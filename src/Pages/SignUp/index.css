@@ -39,4 +39,16 @@ img {
   font-weight: 700;
   width: 100%;
 }
+
+.Submit:hover {
+  background-color: #fe4cba;
+}
+
+.redirect {
+  color: white;
+}
+
+.redirect:hover {
+  color: #F30198;
+}
 /*# sourceMappingURL=index.css.map */

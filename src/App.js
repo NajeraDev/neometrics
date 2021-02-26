@@ -18,20 +18,26 @@ import {
 } from 'reactstrap'
 import EditSchool from './Pages/EditSchool/index';
 import NewSchool from './Pages/NewSchool';
-import Login from './Pages/Login';
+import Signup from './Pages/SignUp/index';
+import { AuthProvider } from './Components/contexts/AuthContext';
+import Login from './Pages/Login/Login'
+import PrivateRoute from './Components/PrivateRoute/PrivateRoute';
 
 
 
 function App() {
   return (
-    <Router>
-      <Switch>
-        <Route path="/login" component={Login} exact={true} />
-        <Route path="/dashboard" component={Home} exact={true} />
-        <Route path="/editschool" component={EditSchool} exact={true} />
-        <Route path="/newschool" component={NewSchool} exact={true} />
-      </Switch>
-    </Router>
+    <AuthProvider>
+      <Router>
+        <Switch>
+          <Route path="/login" component={Login} exact={true} />
+          <Route path="/signup" component={Signup} exact={true} />
+          <PrivateRoute path="/" component={Home} exact={true} />
+          <PrivateRoute path="/editschool" component={EditSchool} exact={true} />
+          <PrivateRoute path="/newschool" component={NewSchool} exact={true} />
+        </Switch>
+      </Router>
+    </AuthProvider>
   )
 }
 
